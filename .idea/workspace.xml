@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2d669e6-d28c-4adb-8d9c-2f2b7e375a87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SQL/dbDDL.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQL/dbDML.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQL/dbDROP.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQL/dbSQL.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +87,8 @@
       <updated>1666068298744</updated>
       <workItem from="1666068300076" duration="1266000" />
       <workItem from="1666744647507" duration="1621000" />
-      <workItem from="1666764565015" duration="1674000" />
+      <workItem from="1666764565015" duration="2206000" />
+      <workItem from="1666973746489" duration="222000" />
     </task>
     <servers />
   </component>
