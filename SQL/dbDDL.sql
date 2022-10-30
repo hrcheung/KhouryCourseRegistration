@@ -31,3 +31,12 @@ PRIMARY KEY (Course_id),
 FOREIGN KEY (Instructor_id) REFERENCES Instructor(NUID),
 FOREIGN KEY (ClassRoom) REFERENCES Room(Room_id)
 );
+
+
+
+
+-- VIEW
+CREATE VIEW timetable
+AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
+FROM Course as c, Room as r
+WHERE c.ClassRoom = r.Room_idtimetable
