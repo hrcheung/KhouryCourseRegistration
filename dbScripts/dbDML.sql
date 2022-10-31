@@ -1,4 +1,5 @@
 --  NUID (PK), Email, Name
+use khouryCourseRegistration;
 insert into Admin (NUID, Email, Name)
 Values ('000000001','01@northeastern.edu','John'),
 ('000000002','02@northeastern.edu','Alex'),

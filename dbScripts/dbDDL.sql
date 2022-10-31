@@ -1,4 +1,5 @@
 -- NUID (PK), Email, Name
+
 create table Admin
 (
 	NUID	VARCHAR(9) NOT NULL,
@@ -8,7 +9,7 @@ create table Admin
     
 -- nuid, email, name, department
 
-create table Admin
+create table Advisor
 (
 	NUID	VARCHAR(9) NOT NULL,
     Email	VARCHAR(30) NOT NULL,
