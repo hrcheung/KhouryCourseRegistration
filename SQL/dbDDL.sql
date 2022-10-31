@@ -40,4 +40,4 @@ CREATE VIEW timetable
 AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
 FROM Course as c, Room as r
 WHERE c.ClassRoom = r.Room_idtimetable
-//test
+//test1
