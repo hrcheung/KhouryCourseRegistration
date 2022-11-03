@@ -39,4 +39,43 @@ FOREIGN KEY (ClassRoom) REFERENCES Room(Room_id)
 CREATE VIEW timetable
 AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
 FROM Course as c, Room as r
-WHERE c.ClassRoom = r.Room_idtimetable
+WHERE c.ClassRoom = r.Room_idtimetable;
+
+CREATE VIEW course_remained_seat
+AS SELECT c.Course_id, c.Max_capacity, (c.Max_capacity - reg_amount.sum_reg) as remained
+FROM Course as c,
+    (SELECT Course_id, count(SNuid) as sum_reg
+	FROM Registration_List
+	GROUP BY Course_id) reg_amount
+WHERE c.Course_id = reg_amount.Course_id
+ORDER BY c.Course_id;
+
+-- Procudure
+USE `khouryCourseRegistration`;
+DROP procedure IF EXISTS `approve_tickets`;
+
+DELIMITER $$ 
+USE `khouryCourseRegistration`$$
+CREATE PROCEDURE `approve_tickets` (course CHAR(4))
+BEGIN
+
+
+  declare done int default 0;
+  declare NUID CHAR(9);
+  declare nuidcur cursor for select SNuid from Registration_Ticket where course_id = course;
+  declare continue handler for not found set done = 1;
+
+  open nuidcur;
+
+  repeat
+    fetch nuidcur into NUID;
+    insert into Registration_List values(course, NUID);
+  until done
+  end repeat;
+
+  close nuidcur;
+
+END$$
+
+DELIMITER ; 
+
