@@ -1,45 +1,36 @@
--- Create the table Room
-Create Table Room(
-    Room_id CHAR(5) Not Null,
-    Building VARCHAR(45) Not Null,
-    Floor INT Not Null,
-    PRIMARY KEY(Room_id)
-);
-
--- Create Instructor
-Create Table Instructor(
-    NUID CHAR(9) Not Null,
-    Email VARCHAR(320) Not Null,
-    Name VARCHAR(45) Not Null,
-    PRIMARY KEY(NUID)
-);
-
--- Create Course
-Create Table Course(
-Course_id		CHAR(4)	        NOT NULL,
-Semester		VARCHAR(15)	    NOT NULL,
-Max_capacity	INT	            NOT NULL,
-Department		CHAR(2)	        NOT NULL,
-Rating			DECIMAL(2,1)	NOT NULL,
-Course_type	    VARCHAR(15)	    NOT NULL,
-Instructor_id	CHAR(9)	        NOT NULL,
-Course_time	    TIME(4)	        NOT NULL,
-Course_day      CHAR(3)         NOT NULL,
-ClassRoom	    CHAR(5),
-
-PRIMARY KEY (Course_id),
-FOREIGN KEY (Instructor_id) REFERENCES Instructor(NUID),
-FOREIGN KEY (ClassRoom) REFERENCES Room(Room_id)
+-- Create the table Message
+Create Table Message(
+Message_id CHAR(5) Not Null,
+Receiver_nuid CHAR(9) Not Null,
+Sender_nuid CHAR(9) Not Null,
+Message_time DATE Not Null,
+Content VARCHAR(10) Not Null,
+Replied BIT(1) Not Null,
+PRIMARY KEY (Message_id),
+FOREIGN KEY (Sender_nuid) REFERENCES Student(NUID),
+FOREIGN KEY (Receiver_nuid) REFERENCES Advisor(NUID)
 );
 
 
+-- Create the table Registration_Ticket
+Create Table Registration_Ticket(
+Ticket_id CHAR(9) Not Null,
+Course_id CHAR(4) Not Null,
+SNuid CHAR(9) Not Null,
+Ticket_time DATE Not Null,
+
+PRIMARY KEY (Ticket_id),
+FOREIGN KEY (Course_id) REFERENCES Course(Course_id),
+FOREIGN KEY (SNuid) REFERENCES Student(NUID)
+);
 
 
+-- Create the table Registration_List
+Create Table Registration_List(
+Course_id CHAR(4) Not Null,
+SNuid CHAR(9) Not Null,
 
+FOREIGN KEY (Course_id) REFERENCES Course(Course_id),
+FOREIGN KEY (SNuid) REFERENCES Student(NUID)
+);
 
--- VIEW
-CREATE VIEW timetable
-AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
-FROM Course as c, Room as r
-WHERE c.ClassRoom = r.Room_idtimetable
---test

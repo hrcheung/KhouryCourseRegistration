@@ -1,3 +1,3 @@
-DROP TABLE Course;
-DROP TABLE Instructor;
-DROP TABLE Room;
+DROP TABLE Message;
+DROP TABLE Registration_List;
+DROP TABLE Registration_Ticket;
