@@ -39,12 +39,11 @@ FOREIGN KEY (ClassRoom) REFERENCES Room(Room_id)
 CREATE VIEW timetable
 AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
 FROM Course as c, Room as r
-WHERE c.ClassRoom = r.Room_idtimetable
+WHERE c.ClassRoom = r.Room_idtimetable;
 
 
 -- Create table Admin
 -- NUID (PK), Email, Name
-use khouryCourseRegistration;
 create table Admin
 (
 	NUID	VARCHAR(9) NOT NULL,
@@ -75,3 +74,11 @@ create table Student
     Department VARCHAR(2) NOT NULL,
     Credits INT(2) NOT NULL,
     PRIMARY KEY (NUID));
+    
+-- create a procedure
+delimiter $$;
+create procedure advisor_name() select distinct Name from Advisor;$$
+delimiter;$$
+
+
+
