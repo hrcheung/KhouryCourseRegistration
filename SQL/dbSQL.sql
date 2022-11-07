@@ -32,22 +32,19 @@ from (select Room_id, Course_time from Room join Course on Room.Room_id = Course
 
 where a.Room_id - b.Room_id <1;
 
--- ！！！Query Admin: find top 1 course id in ratings and its instructor
--- ERROR 1054 (42S22): Unknown column 'Instructor.Rating' in 'order clause'
-
-select Course_id, Name
-from Course left join Instructor on Course.Instructor_id = Instructor.NUID
-order by Instructor.Rating desc
-limit 1;
-
-
--- Query Admin: what Course id have less than 15 registered students? 
+-- Query Admin: what Course id have less than 15 registered students and its instructor is not Lee? 
+select Course_id from
+(select Course_id,Instructor_id
+from Course 
+where Course_id in (
 select Course_id
 from (
 	select Course_id, count(SNuid) as cnt
     from Registration_List
-    ) as tmp
-where tmp.cnt<15;
+    group by Course_id
+    ) as a 
+    where cnt<15)) as a left join Instructor on a.Instructor_id=Instructor.NUID
+where Instructor.Name NOT LIKE "Lee%";
 
 -- Student User
 -- Query what class is in a designated classroom on Monday
