@@ -1,0 +1,3 @@
+DROP TABLE Course;
+DROP TABLE Instructor;
+DROP TABLE Room;
