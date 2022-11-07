@@ -32,14 +32,42 @@ FOREIGN KEY (Instructor_id) REFERENCES Instructor(NUID),
 FOREIGN KEY (ClassRoom) REFERENCES Room(Room_id)
 );
 
+-- Create the table Message
+Create Table Message(
+Message_id CHAR(5) Not Null,
+Receiver_nuid CHAR(9) Not Null,
+Sender_nuid CHAR(9) Not Null,
+Message_time DATE Not Null,
+Content VARCHAR(10) Not Null,
+Replied BIT(1) Not Null,
+PRIMARY KEY (Message_id),
+FOREIGN KEY (Sender_nuid) REFERENCES Student(NUID),
+FOREIGN KEY (Receiver_nuid) REFERENCES Advisor(NUID)
+);
 
 
+-- Create the table Registration_Ticket
+Create Table Registration_Ticket(
+Ticket_id CHAR(9) Not Null,
+Course_id CHAR(4) Not Null,
+SNuid CHAR(9) Not Null,
+Ticket_time DATE Not Null,
 
--- VIEW
-CREATE VIEW timetable
-AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
-FROM Course as c, Room as r
-WHERE c.ClassRoom = r.Room_idtimetable;
+PRIMARY KEY (Ticket_id),
+FOREIGN KEY (Course_id) REFERENCES Course(Course_id),
+FOREIGN KEY (SNuid) REFERENCES Student(NUID)
+);
+
+
+-- Create the table Registration_List
+Create Table Registration_List(
+Course_id CHAR(4) Not Null,
+SNuid CHAR(9) Not Null,
+
+FOREIGN KEY (Course_id) REFERENCES Course(Course_id),
+FOREIGN KEY (SNuid) REFERENCES Student(NUID)
+);
+
 
 
 -- Create table Admin
@@ -74,11 +102,48 @@ create table Student
     Department VARCHAR(2) NOT NULL,
     Credits INT(2) NOT NULL,
     PRIMARY KEY (NUID));
-    
+
+-- VIEW
+CREATE VIEW timetable
+AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
+FROM Course as c, Room as r
+WHERE c.ClassRoom = r.Room_idtimetable;
+
+
 -- create a procedure
 delimiter $$;
 create procedure advisor_name() select distinct Name from Advisor;$$
 delimiter;$$
+
+
+USE `khouryCourseRegistration`;
+DROP procedure IF EXISTS `approve_tickets`;
+
+DELIMITER $$
+USE `khouryCourseRegistration`$$
+CREATE PROCEDURE `approve_tickets` (course CHAR(4))
+BEGIN
+
+  declare done int default 0;
+  declare NUID CHAR(9);
+  declare nuidcur cursor for select SNuid from Registration_Ticket where course_id = course;
+  declare continue handler for not found set done = 1;
+
+  open nuidcur;
+
+  repeat
+    fetch nuidcur into NUID;
+    insert into Registration_List values(course, NUID);
+  until done
+  end repeat;
+
+  close nuidcur;
+
+END$$
+
+DELIMITER ;
+
+
 
 
 
