@@ -148,6 +148,16 @@ END$$
 DELIMITER ;
 
 
+-- Trigger: if the course type changed from "Traditional" to "Live Stream", "Max_capacity" will increase.
+DROP TRIGGER IF EXISTS update_course_capacity;
+DELIMITER $$
+CREATE TRIGGER update_course_capacity
+    BEFORE UPDATE
+    ON Course FOR EACH ROW
+begin
+    set new.Max_capacity = old.Max_capacity + 50;
+end; $$
+DELIMITER $$
 
 
 
