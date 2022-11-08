@@ -47,10 +47,11 @@ from (
 where Instructor.Name NOT LIKE "Lee%";
 
 -- Student User
--- Query what class is in a designated classroom on Monday
-SELECT Course_id
-FROM Course
-WHERE Course_day = 'Mon' AND ClassRoom = 1032;
+-- Query what class is in a designated classroom('4N 2nd St') on Monday
+SELECT c.Course_id
+FROM Course c
+         LEFT JOIN Room rr ON c.ClassRoom = rr.Room_id
+WHERE c.Course_day = 'Mon' AND rr.Building = '4 N 2nd St';
 
 -- For student with NUID = 000000015, Query what courses they have taken in the past semester(spring)
 SELECT r.Course_id
