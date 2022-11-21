@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
-<title>Test MySQL</title>
+    <!-- Bootstrap core CSS -->
+    <link
+            rel = 'stylesheet'
+            type="text/css"
+            href="{% static '/css/bootstrap.css' %}">
+    <title>Khoury Registration Website</title>
 </head>
 <body>
-<h1>Visitor Name: {{ visitor_fname }}</h1>
-<h1>NUID: {{ visitor_nuid }} </h1>
+
+<h1>Khoury Registration Website</h1>
+
+<button type="button" class="btn btn-primary">Student LogIn</button>
+<button type="button" class="btn btn-primary">Advisor LogIn</button>
+<button type="button" class="btn btn-primary">Admin LogIn</button>
+
+
 </body>
 </html>

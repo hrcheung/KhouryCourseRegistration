@@ -4,9 +4,4 @@ from .models import Visitor
 
 
 def testmysql(request):
-	visitor=Visitor.objects.all()
-	context={
-		'visitor_fname':visitor[0].fname,
-		'visitor_nuid':visitor[0].nuid,
-	}
-	return render(request,'home.html',context)
+	return render(request,'home.html')
