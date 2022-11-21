@@ -18,5 +18,11 @@ from django.urls import path
 from dbapp import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('',views.testmysql),
+    path('',views.home),
+    path('student', views.student_page),
+    path('advisor', views.advisor_page),
+
+    path('student/lookup', views.getStudentNuid.as_view()),
+    path('student/<nuid>', views.getRegistStudent)
+
 ]

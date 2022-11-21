@@ -53,7 +53,7 @@ FROM Course c
          LEFT JOIN Room rr ON c.ClassRoom = rr.Room_id
 WHERE c.Course_day = 'Mon' AND rr.Building = '4 N 2nd St';
 
--- For student with NUID = 000000015, Query what courses they have taken in the past semester(spring)
+-- For api with NUID = 000000015, Query what courses they have taken in the past semester(spring)
 SELECT r.Course_id
 FROM Registration_List r
 LEFT JOIN Course c ON c.Course_id = r.Course_id
