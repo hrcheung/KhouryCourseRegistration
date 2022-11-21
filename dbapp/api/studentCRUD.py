@@ -20,23 +20,21 @@ def getRegisterClass(nuid):
         c = add_course_info(c)
         c["status"] = "submited"
     context["classes"] += res
-
     return context
 
 
 def add_course_info(context):
     course_id = context["Course_id"]
-    res = getCourseInfo(course_id)
+    res = get_course_info(course_id)
     for k in res:
         context[k] = res[k]
     return context
 
 
-
-def getCourseInfo(courseId):
+def get_course_info(courseId):
     cursor = connection.cursor()
 
-    SQL = "SELECT Semester FROM Course WHERE Course_id = " + str(courseId)
+    SQL = "SELECT * FROM Course WHERE Course_id = " + str(courseId)
     cursor.execute(SQL)
     res = dictfetchall(cursor)
     return res[0]

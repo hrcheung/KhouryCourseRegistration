@@ -19,6 +19,7 @@ Create Table Instructor(
 -- Create Course
 Create Table Course(
 Course_id		CHAR(4)	        NOT NULL,
+Course_name		VARCHAR(50)		NOT NULL,
 Semester		VARCHAR(15)	    NOT NULL,
 Max_capacity	INT	            NOT NULL,
 Department		CHAR(2)	        NOT NULL,
@@ -59,12 +60,13 @@ create table Advisor
 -- nuid, email, name, visa_type, department, credits
 create table Student
 (
-	NUID	VARCHAR(9) NOT NULL,
-    Email	VARCHAR(320) NOT NULL,
-    Name	VARCHAR(45) NOT NULL,
-    Visa_type INT(1) NOT NULL, 
-    Department VARCHAR(2) NOT NULL,
-    Credits INT(2) NOT NULL,
+	NUID		VARCHAR(9) NOT NULL,
+    Email		VARCHAR(320) NOT NULL,
+    Name		VARCHAR(45) NOT NULL,
+    Visa_type 	INT(1) NOT NULL, 
+    Department 	VARCHAR(2) NOT NULL,
+    Credits 	INT(2) NOT NULL,
+    Advisor 	VARCHAR(9) NOT NULL,
     PRIMARY KEY (NUID));
 
 -- Create the table Message
@@ -73,7 +75,7 @@ Message_id CHAR(5) Not Null,
 Receiver_nuid CHAR(9) Not Null,
 Sender_nuid CHAR(9) Not Null,
 Message_time DATE Not Null,
-Content VARCHAR(10) Not Null,
+Content VARCHAR(100),
 Replied BIT(1) Not Null,
 PRIMARY KEY (Message_id),
 FOREIGN KEY (Sender_nuid) REFERENCES Student(NUID),

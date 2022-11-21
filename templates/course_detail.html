@@ -37,30 +37,26 @@
 <div class="container px-4 py-5">
 
     <!-- Content here -->
-    <h2 class="pb-2 border-bottom">NUID: {{ nuid }} </h2>
+    <h2 class="pb-2 border-bottom">{{ Course_id }} </h2>
 
     <div class="row g-2">
-        {% for class in classes %}
+            <ul class="list-group">
+                <li class="list-group-item">Name: {{ Course_name }}</li>
+                <li class="list-group-item">Semester: {{ Semester }}</li>
+                <li class="list-group-item">Max Capacity: {{ Max_capacity }}</li>
+                <li class="list-group-item">Department: {{ Department }}</li>
+                <li class="list-group-item">Rating: {{ Rating }}</li>
+                <li class="list-group-item">Type: {{ Course_type }}</li>
+                <li class="list-group-item">Time: {{ Course_time }}</li>
+                <li class="list-group-item">Day: {{ Course_day }}</li>
+                <li class="list-group-item">Class Room: {{ ClassRoom }}</li>
 
-            <div class="col-md-6 m-t-20 m-b-20">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ class.Course_id }} : {{ class.Course_name }}</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item">Status: {{ class.status }}</li>
-                            <li class="list-group-item">Semester: {{ class.Semester }}</li>
-                        </ul>
-                        <br>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/class/{{ class.Course_id }}" class="btn btn-primary btn-sm">Course Detail</a>
-{#                            TODO: Drop function#}
-                            <a href="#" class="btn btn-secondary btn-sm">Drop</a>
-                        </div>
-                    </div>
-                </div>
+            </ul>
+
+
             </div>
-        {% endfor %}
-    </div>
+
+</div>
 </div>
 
 </body>

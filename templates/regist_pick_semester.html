@@ -3,12 +3,17 @@
 {% load static %}
 <head>
     <!-- Bootstrap core CSS -->
-    <link rel='stylesheet' type="text/css" href="{% static '/css/bootstrap.css' %}">
-    <title>Student Hub</title>
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/bootstrap.css' %}">
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/styles.css' %}">
+    <title>Khoury Registration Website</title>
 </head>
 <body>
-
-{#Nav Bar#}
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -37,30 +42,19 @@
 <div class="container px-4 py-5">
 
     <!-- Content here -->
-    <h2 class="pb-2 border-bottom">NUID: {{ nuid }} </h2>
+    <label for="semester">Choose a Semester:</label>
+    <select class="form-select w-25" id="semester" form="semester_form" name="semester">
+        <option selected>Choose semester</option>
+        <option value="Spring">Spring</option>
+        <option value="Summer">Summer</option>
+        <option value="Fall">Fall</option>
+    </select>
+    <form method="post" id="semester_form">
+        {% csrf_token %} {{ form.as_p }}
+        <br class="my-4">
+        <button class="w-10 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+    </form>
 
-    <div class="row g-2">
-        {% for class in classes %}
-
-            <div class="col-md-6 m-t-20 m-b-20">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ class.Course_id }} : {{ class.Course_name }}</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item">Status: {{ class.status }}</li>
-                            <li class="list-group-item">Semester: {{ class.Semester }}</li>
-                        </ul>
-                        <br>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/class/{{ class.Course_id }}" class="btn btn-primary btn-sm">Course Detail</a>
-{#                            TODO: Drop function#}
-                            <a href="#" class="btn btn-secondary btn-sm">Drop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
 </div>
 
 </body>

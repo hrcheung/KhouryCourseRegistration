@@ -23,6 +23,11 @@ urlpatterns = [
     path('advisor', views.advisor_page),
 
     path('student/lookup', views.getStudentNuid.as_view()),
-    path('student/<nuid>', views.getRegistStudent)
+    path('student/<nuid>', views.getRegistStudent),
+
+    path('student_regist', views.get_semester.as_view()),
+    path('student_regist/<sem>', views.show_class),
+
+    path('class/<course_id>', views.get_course_detal)
 
 ]
