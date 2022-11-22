@@ -1,3 +1,5 @@
+USE khouryCourseRegistration;
+
 -- Create the table Room
 Create Table Room(
     Room_id CHAR(5) Not Null,
@@ -17,6 +19,7 @@ Create Table Instructor(
 -- Create Course
 Create Table Course(
 Course_id		CHAR(4)	        NOT NULL,
+Course_name		VARCHAR(50)		NOT NULL,
 Semester		VARCHAR(15)	    NOT NULL,
 Max_capacity	INT	            NOT NULL,
 Department		CHAR(2)	        NOT NULL,
@@ -32,31 +35,99 @@ FOREIGN KEY (Instructor_id) REFERENCES Instructor(NUID),
 FOREIGN KEY (ClassRoom) REFERENCES Room(Room_id)
 );
 
+-- Create table Admin
+-- NUID (PK), Email, Name
+create table Admin
+(
+	NUID	VARCHAR(9) NOT NULL,
+    Email	VARCHAR(320) NOT NULL,
+    Name	VARCHAR(45) NOT NULL,
+    PRIMARY KEY (NUID));
+    
+-- nuid, email, name, department
+
+-- Create table Advisor
+create table Advisor
+(
+	NUID	VARCHAR(9) NOT NULL,
+    Email	VARCHAR(320) NOT NULL,
+    Name	VARCHAR(45) NOT NULL,
+    Department VARCHAR(2) NOT NULL,
+    PRIMARY KEY (NUID));
+
+
+-- Create table Student
+-- nuid, email, name, visa_type, department, credits
+create table Student
+(
+	NUID		VARCHAR(9) NOT NULL,
+    Email		VARCHAR(320) NOT NULL,
+    Name		VARCHAR(45) NOT NULL,
+    Visa_type 	INT(1) NOT NULL, 
+    Department 	VARCHAR(2) NOT NULL,
+    Credits 	INT(2) NOT NULL,
+    Advisor 	VARCHAR(9) NOT NULL,
+    PRIMARY KEY (NUID));
+
+-- Create the table Message
+Create Table Message(
+Message_id CHAR(5) Not Null,
+Receiver_nuid CHAR(9) Not Null,
+Sender_nuid CHAR(9) Not Null,
+Message_time DATE Not Null,
+Content VARCHAR(100),
+Replied BIT(1) Not Null,
+PRIMARY KEY (Message_id),
+FOREIGN KEY (Sender_nuid) REFERENCES Student(NUID),
+FOREIGN KEY (Receiver_nuid) REFERENCES Advisor(NUID)
+);
+
+
+-- Create the table Registration_Ticket
+Create Table Registration_Ticket(
+Ticket_id CHAR(9) Not Null,
+Course_id CHAR(4) Not Null,
+SNuid CHAR(9) Not Null,
+Ticket_time DATE Not Null,
+
+PRIMARY KEY (Ticket_id),
+FOREIGN KEY (Course_id) REFERENCES Course(Course_id),
+FOREIGN KEY (SNuid) REFERENCES Student(NUID)
+);
+
+
+-- Create the table Registration_List
+Create Table Registration_List(
+Course_id CHAR(4) Not Null,
+SNuid CHAR(9) Not Null,
+
+FOREIGN KEY (Course_id) REFERENCES Course(Course_id),
+FOREIGN KEY (SNuid) REFERENCES Student(NUID)
+);
+
+
 
 
 
 -- VIEW
+DROP VIEW IF EXISTS timetable;
 CREATE VIEW timetable
 AS Select c.course_id, c.course_time, c.Course_day, r.Room_id, r.Building, r.Floor
 FROM Course as c, Room as r
-WHERE c.ClassRoom = r.Room_idtimetable;
+WHERE c.ClassRoom = r.Room_id;
 
-CREATE VIEW course_remained_seat
-AS SELECT c.Course_id, c.Max_capacity, (c.Max_capacity - reg_amount.sum_reg) as remained
-FROM Course as c,
-    (SELECT Course_id, count(SNuid) as sum_reg
-	FROM Registration_List
-	GROUP BY Course_id) reg_amount
-WHERE c.Course_id = reg_amount.Course_id
-ORDER BY c.Course_id;
 
--- Procudure
-USE `khouryCourseRegistration`;
-DROP procedure IF EXISTS `approve_tickets`;
+-- create a procedure
+drop procedure if exists advisor_name;
+delimiter $$
+create procedure advisor_name() select distinct Name from Advisor $$
+delimiter ;
 
-DELIMITER $$ 
-USE `khouryCourseRegistration`$$
-CREATE PROCEDURE `approve_tickets` (course CHAR(4))
+
+DROP procedure IF EXISTS approve_tickets;
+
+DELIMITER $$
+CREATE PROCEDURE approve_tickets (course CHAR(4))
 BEGIN
 
 
@@ -77,5 +148,22 @@ BEGIN
 
 END$$
 
+DELIMITER ;
+
+
+-- Trigger: if the course type changed from "Traditional" to "Live Stream", "Max_capacity" will increase.
+DROP TRIGGER IF EXISTS update_course_capacity;
+DELIMITER $$
+CREATE TRIGGER update_course_capacity
+    BEFORE UPDATE
+    ON Course FOR EACH ROW
+begin
+    set new.Max_capacity = old.Max_capacity + 50;
+end; $$
+DELIMITER $$
+
+
+
 DELIMITER ; 
+
 

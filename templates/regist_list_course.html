@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Bootstrap core CSS -->
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/bootstrap.css' %}">
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/styles.css' %}">
+    <title>Khoury Registration Website</title>
+</head>
+<body>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/student">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/advisor">Advisor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container px-4 py-5">
+
+
+    <div class="container px-4 py-5">
+
+        <!-- Content here -->
+        <h2 class="pb-2 border-bottom">Class for {{ semester }} </h2>
+
+        <div class="row g-2">
+            {% for class in classes %}
+
+            {% endfor %}
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">course id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">capacity</th>
+                    <th scope="col">department</th>
+                    <th scope="col">type</th>
+                    <th scope="col">instructor</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for class in classes %}
+                        <tr>
+                            <th scope="row">{{ class.Course_id }}</th>
+                            <td>{{ class.Course_name }}</td>
+                            <td>{{ class.Max_capacity }}</td>
+                            <td>{{ class.Department }}</td>
+                            <td>{{ class.Course_type }}</td>
+                            <td>{{ class.Instructor_id }}</td>
+
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
