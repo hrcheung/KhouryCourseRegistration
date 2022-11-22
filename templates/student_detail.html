@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' type="text/css" href="{% static '/css/bootstrap.css' %}">
+    <title>Student Hub</title>
+</head>
+<body>
+
+{#Nav Bar#}
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/student">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/advisor">Advisor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container px-4 py-5">
+
+    <!-- Content here -->
+    <h2 class="pb-2 border-bottom">NUID: {{ nuid }} </h2>
+
+    <div class="row g-2">
+{#    {"nuid":0000017, "class":[{course}{}{}]}#}
+        {% for class in classes %}
+
+            <div class="col-md-6 m-t-20 m-b-20">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ class.Course_id }} : {{ class.Course_name }}</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item">Status: {{ class.status }}</li>
+                            <li class="list-group-item">Semester: {{ class.Semester }}</li>
+                        </ul>
+                        <br>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="/class/{{ class.Course_id }}" class="btn btn-primary btn-sm">Course Detail</a>
+{#                            TODO: Drop function#}
+                            <a href="#" class="btn btn-secondary btn-sm">Drop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

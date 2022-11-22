@@ -1,3 +1,13 @@
-DROP TABLE Message;
-DROP TABLE Registration_List;
-DROP TABLE Registration_Ticket;
+use khouryCourseRegistration;
+DROP TABLE IF EXISTS Message ;
+DROP TABLE IF EXISTS Registration_List;
+DROP TABLE IF EXISTS Registration_Ticket;
+
+DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Instructor;
+DROP TABLE IF EXISTS Room;
+
+DROP TABLE IF EXISTS Admin;
+DROP TABLE IF EXISTS Advisor;
+DROP TABLE IF EXISTS Student;
+

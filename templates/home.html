@@ -1,10 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
-<title>Test MySQL</title>
+    <!-- Bootstrap core CSS -->
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/bootstrap.css' %}">
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/styles.css' %}">
+    <title>Khoury Registration Website</title>
 </head>
 <body>
-<h1>Visitor Name: {{ visitor_fname }}</h1>
-<h1>NUID: {{ visitor_nuid }} </h1>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/student">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/advisor">Advisor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container px-4 py-5">
+    <h2 class="pb-2 border-bottom">Welcome to Khoury Registration Website</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start">
+            <div>
+                <h3 class="fs-2">Admin</h3>
+                <ul>
+                    <li>Manage entire system</li>
+                    <li>Add/modify/update/remove courses</li>
+                    <li>Assign a classroom to a course</li>
+                </ul>
+                <a href="/admin" class="btn btn-primary">
+                    Admin Page
+                </a>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <div>
+                <h3 class="fs-2">Advisor</h3>
+                <ul>
+                    <li>Approve or decline student’s course registration</li>
+                    <li>With advisor approval, the course registration will be finalized</li>
+                </ul>
+                <a href="/advisor" class="btn btn-primary">
+                    Advisor Page
+                </a>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start">
+            <div>
+                <h3 class="fs-2">Student</h3>
+                <ul>
+                    <li>Add/drop courses</li>
+                    <li>The course registration will be finalized with advisor’s approval</li>
+                </ul>
+                <a href="/student" class="btn btn-primary">
+                    Student Page button
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 </body>
 </html>
