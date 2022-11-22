@@ -130,6 +130,7 @@ DELIMITER $$
 CREATE PROCEDURE approve_tickets (course CHAR(4))
 BEGIN
 
+
   declare done int default 0;
   declare NUID CHAR(9);
   declare nuidcur cursor for select SNuid from Registration_Ticket where course_id = course;
@@ -161,5 +162,8 @@ begin
 end; $$
 DELIMITER $$
 
+
+
+DELIMITER ; 
 
 
