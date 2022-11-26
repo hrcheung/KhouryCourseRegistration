@@ -55,26 +55,36 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th scope="col"></th>
                     <th scope="col">course id</th>
                     <th scope="col">name</th>
-                    <th scope="col">capacity</th>
-                    <th scope="col">department</th>
+{#                    <th scope="col">capacity</th>#}
+                    <th scope="col">Remained Seats</th>
+{#                    <th scope="col">department</th>#}
                     <th scope="col">type</th>
                     <th scope="col">instructor</th>
+                    <th scope="col">ClassRoom</th>
+
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     {% for class in classes %}
                         <tr>
-                            <th scope="row">{{ class.Course_id }}</th>
+                            <th scope="row">
+                                <a href="register/{{ class.Course_id }}">
+                                    <button class="btn btn-primary btn-sm" type="button">register</button>
+                                </a>
+                            </th>
+                            <td>{{ class.Course_id }}</td>
                             <td>{{ class.Course_name }}</td>
-                            <td>{{ class.Max_capacity }}</td>
-                            <td>{{ class.Department }}</td>
+{#                            <td>{{ class.Max_capacity }}</td>#}
+                            <td>{{ class.remained}}</td>
+{#                            <td>{{ class.Department }}</td>#}
                             <td>{{ class.Course_type }}</td>
                             <td>{{ class.Instructor_id }}</td>
-
-
+                            <td>{{ class.ClassRoom}}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

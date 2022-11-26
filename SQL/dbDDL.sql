@@ -85,7 +85,7 @@ FOREIGN KEY (Receiver_nuid) REFERENCES Advisor(NUID)
 
 -- Create the table Registration_Ticket
 Create Table Registration_Ticket(
-Ticket_id CHAR(9) Not Null,
+Ticket_id INT Not Null AUTO_INCREMENT,
 Course_id CHAR(4) Not Null,
 SNuid CHAR(9) Not Null,
 Ticket_time DATE Not Null,

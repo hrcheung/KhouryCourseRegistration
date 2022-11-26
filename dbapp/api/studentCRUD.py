@@ -1,4 +1,17 @@
 from django.db import connection
+from datetime import datetime
+
+def register(nuid, course):
+    date = datetime.today().strftime('%Y-%m-%d')
+    cursor = connection.cursor()
+    SQL = f"INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('{course}', '{nuid}', '{date}')"
+    cursor.execute(SQL)
+
+
+def deleteTicket(nuid, course, table):
+    SQL = f"DELETE FROM {table} WHERE SNuid = '{nuid}' AND Course_id = '{course}'"
+    cursor = connection.cursor()
+    cursor.execute(SQL)
 
 
 def getRegisterClass(nuid):
@@ -13,7 +26,7 @@ def getRegisterClass(nuid):
         c["status"] = "registed"
     context["classes"] = res
 
-    SQL = "SELECT Course_id FROM Registration_Ticket WHERE SNuid = " + str(nuid)
+    SQL = "SELECT Course_id, Ticket_time FROM Registration_Ticket WHERE SNuid = " + str(nuid)
     cursor.execute(SQL)
     res = dictfetchall(cursor)
     for c in res:

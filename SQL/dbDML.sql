@@ -73,14 +73,14 @@ INSERT INTO Message VALUES(00007, '000000012', '000000020', '2021-02-19', 'Class
 INSERT INTO Message VALUES(00008, '000000008', '000000021', '2021-02-25', 'Message test', 1);
 
 -- Sample Value Registration_Ticket
-INSERT INTO Registration_Ticket VALUES('000000001', '5001', '000000015', '2021-03-04');
-INSERT INTO Registration_Ticket VALUES('000000002', '5110', '000000015', '2021-02-05');
-INSERT INTO Registration_Ticket VALUES('000000003', '5220', '000000016', '2021-03-11');
-INSERT INTO Registration_Ticket VALUES('000000004', '6120', '000000017', '2021-03-07');
-INSERT INTO Registration_Ticket VALUES('000000005', '5110', '000000018', '2021-03-08');
-INSERT INTO Registration_Ticket VALUES('000000006', '5220', '000000019', '2021-04-09');
-INSERT INTO Registration_Ticket VALUES('000000007', '5004', '000000019', '2021-05-12');
-INSERT INTO Registration_Ticket VALUES('000000008', '5110', '000000020', '2021-03-27');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5001', '000000015', '2021-03-04');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5110', '000000015', '2021-02-05');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5220', '000000016', '2021-03-11');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('6120', '000000017', '2021-03-07');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5110', '000000018', '2021-03-08');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5220', '000000019', '2021-04-09');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5004', '000000019', '2021-05-12');
+INSERT INTO Registration_Ticket (Course_id, SNuid, Ticket_time) VALUES('5110', '000000020', '2021-03-27');
 
 -- Sample Value Registration_List
 INSERT INTO Registration_List VALUES('5001', '000000015');
