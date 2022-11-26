@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' type="text/css" href="{% static '/css/bootstrap.css' %}">
+    <title>Student Hub</title>
+</head>
+<body>
+
+{#Nav Bar#}
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/student">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/advisor">Advisor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container px-4 py-5">
+
+    <!-- Content here -->
+    <h2 class="pb-2 border-bottom">Please enter the student's NUID to continue approve/decline</h2>
+
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="nuid" class="form-label">NUID</label>
+                <input type="text" class="form-control" id="nuid" placeholder="" name="nuid">
+
+                <label for="course" class="form-label">Course ID</label>
+                <input type="text" class="form-control" id="course" placeholder="{{ course_id }}" name="course" disabled>
+            </div>
+
+
+        </div>
+
+        <br class="my-4">
+
+        <button class="w-10 btn btn-primary btn-lg" type="submit">Finalize your decision</button>
+    </form>
+
+</div>
+
+</body>
+</html>

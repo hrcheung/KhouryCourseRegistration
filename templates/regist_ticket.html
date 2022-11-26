@@ -48,17 +48,20 @@
         <h2 class="pb-2 border-bottom">Current Ticket </h2>
 
         <div class="row g-2">
-            <!-- {% for ticket in tickets %}
+            {% for ticket in tickets %}
 
-            {% endfor %} -->
+            {% endfor %}
 
             <table class="table table-striped">
                 <thead>
                 <tr>
+
                     <th scope="col">Ticket id</th>
                     <th scope="col">Course id</th>
                     <th scope="col">Student Id</th>
                     <th scope="col">Ticket Time</th>
+                    <th scope="col">Approve</th>
+                    <th scope="col">Decline</th>
 
                 </tr>
                 </thead>
@@ -66,10 +69,21 @@
                 <tr>
                     {% for ticket in tickets %}
                         <tr>
+
                             <th scope="row">{{ ticket.Ticket_id }}</th>
                             <td>{{ ticket.Course_id }}</td>
                             <td>{{ ticket.SNuid }}</td>
                             <td>{{ ticket.Ticket_time }}</td>
+                            <th scope="row">
+                                <a href="advisor_approve/approve/{{ ticket.Course_id }}">
+                                    <button class="btn btn-primary btn-sm" type="button">approve</button>
+                                </a>
+                            </th>
+                            <th scope="row">
+                                <a href="advisor_approve/decline/{{ ticket.Course_id }}">
+                                    <button class="btn btn-primary btn-sm" type="button">decline</button>
+                                </a>
+                            </th>
 
                         </tr>
                     {% endfor %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
-from dbapp.api.advisorTicket import getTickets
+from dbapp.api.advisorTicket import approve, decline, getTickets
 
 from .api.class_detail import get_all_class
 from .models import Visitor
@@ -52,4 +52,22 @@ def getRegistTicket(request):
     context=getTickets()
     return render(request,'regist_ticket.html',context)
 
+class approveClass(TemplateView):
+    template_name='advisor_decide_nuid.html'
+    def get(self, req, course_id):
+        return render(req, self.template_name, {'course_id': course_id})
 
+    def post(self, req, course_id):
+        nuid = req.POST.get("nuid")
+        approve(nuid, course_id)
+        return redirect("/advisor_approve")
+    
+class declineClass(TemplateView):
+    template_name='advisor_decide_nuid.html'
+    def get(self, req, course_id):
+        return render(req, self.template_name, {'course_id': course_id})
+
+    def post(self, req, course_id):
+        nuid = req.POST.get("nuid")
+        decline(nuid, course_id)
+        return redirect("/advisor_approve")
