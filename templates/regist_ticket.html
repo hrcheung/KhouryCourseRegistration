@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Bootstrap core CSS -->
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/bootstrap.css' %}">
+    <link
+            rel='stylesheet'
+            type="text/css"
+            href="{% static '/css/styles.css' %}">
+    <title>Khoury Registration Website</title>
+</head>
+<body>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/student">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/advisor">Advisor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container px-4 py-5">
+
+
+    <div class="container px-4 py-5">
+
+        <!-- Content here -->
+        <h2 class="pb-2 border-bottom">Current Ticket </h2>
+
+        <div class="row g-2">
+            {% for ticket in tickets %}
+
+            {% endfor %}
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+
+                    <th scope="col">Ticket id</th>
+                    <th scope="col">Course id</th>
+                    <th scope="col">Student Id</th>
+                    <th scope="col">Ticket Time</th>
+                    <th scope="col">Approve</th>
+                    <th scope="col">Decline</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    {% for ticket in tickets %}
+                        <tr>
+
+                            <th scope="row">{{ ticket.Ticket_id }}</th>
+                            <td>{{ ticket.Course_id }}</td>
+                            <td>{{ ticket.SNuid }}</td>
+                            <td>{{ ticket.Ticket_time }}</td>
+                            <th scope="row">
+                                <a href="advisor_approve/approve/{{ ticket.Course_id }}">
+                                    <button class="btn btn-primary btn-sm" type="button">approve</button>
+                                </a>
+                            </th>
+                            <th scope="row">
+                                <a href="advisor_approve/decline/{{ ticket.Course_id }}">
+                                    <button class="btn btn-primary btn-sm" type="button">decline</button>
+                                </a>
+                            </th>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
