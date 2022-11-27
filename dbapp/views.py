@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DeleteView
 
 from dbapp.api.advisorTicket import approve, decline, getTickets
 
 from .api.class_detail import get_all_class
 from .models import Visitor
-from .api.studentCRUD import getRegisterClass, get_course_info
+from .api.studentCRUD import getRegisterClass, get_course_info, register, deleteTicket
 
 
 
@@ -31,13 +31,33 @@ class getStudentNuid(TemplateView):
 
 class get_semester(TemplateView):
     template_name = 'regist_pick_semester.html'
+
     def post(self, req):
         return redirect("/student_regist/" + req.POST.get("semester"), {"semester": req.POST.get("semester")})
+
+
+class registerClass(TemplateView):
+    template_name = 'regist_enter_nuid.html'
+
+    def get(self, req, course_id):
+        return render(req, self.template_name, {'course_id': course_id})
+
+    def post(self, req, course_id):
+        nuid = req.POST.get("nuid")
+        register(nuid, course_id)
+        return redirect("/student/" + nuid, {"nuid": nuid})
+
 
 def show_class(request, sem):
     context = {"semester": sem, "classes": get_all_class(sem)}
 
-    return  render(request, 'regist_list_course.html', context)
+    return render(request, 'regist_list_course.html', context)
+
+
+def dropClass(req, nuid, course_id):
+    deleteTicket(nuid, course_id, 'Registration_List')
+    deleteTicket(nuid, course_id, 'Registration_Ticket')
+    return redirect("/student/" + nuid, {"nuid": nuid})
 
 def getRegistStudent(request, nuid):
     context = getRegisterClass(nuid)

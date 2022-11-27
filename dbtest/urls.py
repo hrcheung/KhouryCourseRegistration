@@ -24,9 +24,11 @@ urlpatterns = [
 
     path('student/lookup', views.getStudentNuid.as_view()),
     path('student/<nuid>', views.getRegistStudent),
+    path('student/<nuid>/<course_id>', views.dropClass),
 
     path('student_regist', views.get_semester.as_view()),
     path('student_regist/<sem>', views.show_class),
+    path('student_regist/register/<course_id>', views.registerClass.as_view()),
 
     path('class/<course_id>', views.get_course_detal),
     path('advisor_approve',views.getRegistTicket),

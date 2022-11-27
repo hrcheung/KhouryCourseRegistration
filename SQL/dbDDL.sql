@@ -85,7 +85,7 @@ FOREIGN KEY (Receiver_nuid) REFERENCES Advisor(NUID)
 
 -- Create the table Registration_Ticket
 Create Table Registration_Ticket(
-Ticket_id CHAR(9) Not Null,
+Ticket_id INT Not Null AUTO_INCREMENT,
 Course_id CHAR(4) Not Null,
 SNuid CHAR(9) Not Null,
 Ticket_time DATE Not Null,
@@ -130,6 +130,7 @@ DELIMITER $$
 CREATE PROCEDURE approve_tickets (course CHAR(4))
 BEGIN
 
+
   declare done int default 0;
   declare NUID CHAR(9);
   declare nuidcur cursor for select SNuid from Registration_Ticket where course_id = course;
@@ -161,5 +162,8 @@ begin
 end; $$
 DELIMITER $$
 
+
+
+DELIMITER ; 
 
 
