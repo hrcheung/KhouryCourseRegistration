@@ -28,6 +28,10 @@ urlpatterns = [
     path('student_regist', views.get_semester.as_view()),
     path('student_regist/<sem>', views.show_class),
 
-    path('class/<course_id>', views.get_course_detal)
+    path('class/<course_id>', views.get_course_detal),
+    path('advisor_approve',views.getRegistTicket),
+    path('advisor_approve/approve/<course_id>',views.approveClass.as_view()),
+    path('advisor_approve/decline/<course_id>',views.declineClass.as_view())
+
 
 ]
