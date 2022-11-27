@@ -1,2 +1,4 @@
 .DS_Store
 .idea
+
+dbapp/__pycache__/
