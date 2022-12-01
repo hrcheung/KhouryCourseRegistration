@@ -75,12 +75,12 @@
                             <td>{{ ticket.SNuid }}</td>
                             <td>{{ ticket.Ticket_time }}</td>
                             <th scope="row">
-                                <a href="advisor_approve/approve/{{ ticket.Course_id }}">
+                                <a href="advisor_approve/approve/{{ ticket.SNuid }}/{{ ticket.Course_id }}">
                                     <button class="btn btn-primary btn-sm" type="button">approve</button>
                                 </a>
                             </th>
                             <th scope="row">
-                                <a href="advisor_approve/decline/{{ ticket.Course_id }}">
+                                <a href="advisor_approve/decline/{{ ticket.SNuid }}/{{ ticket.Course_id }}">
                                     <button class="btn btn-primary btn-sm" type="button">decline</button>
                                 </a>
                             </th>

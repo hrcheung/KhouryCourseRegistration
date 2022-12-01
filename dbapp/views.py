@@ -74,20 +74,18 @@ def getRegistTicket(request):
 
 class approveClass(TemplateView):
     template_name='advisor_decide_nuid.html'
-    def get(self, req, course_id):
-        return render(req, self.template_name, {'course_id': course_id})
+    def get(self, req, course_id, nuid):
+        return render(req, self.template_name, {'course_id': course_id, 'nuid': nuid})
 
-    def post(self, req, course_id):
-        nuid = req.POST.get("nuid")
+    def post(self, req, course_id, nuid):
         approve(nuid, course_id)
         return redirect("/advisor_approve")
     
 class declineClass(TemplateView):
     template_name='advisor_decide_nuid.html'
-    def get(self, req, course_id):
-        return render(req, self.template_name, {'course_id': course_id})
+    def get(self, req, course_id, nuid):
+        return render(req, self.template_name, {'course_id': course_id, 'nuid': nuid})
 
-    def post(self, req, course_id):
-        nuid = req.POST.get("nuid")
+    def post(self, req, course_id, nuid):
         decline(nuid, course_id)
         return redirect("/advisor_approve")

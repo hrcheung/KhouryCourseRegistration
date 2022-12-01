@@ -32,8 +32,8 @@ urlpatterns = [
 
     path('class/<course_id>', views.get_course_detal),
     path('advisor_approve',views.getRegistTicket),
-    path('advisor_approve/approve/<course_id>',views.approveClass.as_view()),
-    path('advisor_approve/decline/<course_id>',views.declineClass.as_view())
+    path('advisor_approve/approve/<nuid>/<course_id>',views.approveClass.as_view()),
+    path('advisor_approve/decline/<nuid>/<course_id>',views.declineClass.as_view())
 
 
 ]
