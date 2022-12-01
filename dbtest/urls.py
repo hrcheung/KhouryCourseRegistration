@@ -21,6 +21,7 @@ urlpatterns = [
     path('',views.home),
     path('student', views.student_page),
     path('advisor', views.advisor_page),
+    path('admin', views.admin_page),
 
     path('student/lookup', views.getStudentNuid.as_view()),
     path('student/<nuid>', views.getRegistStudent),
@@ -35,5 +36,10 @@ urlpatterns = [
     path('advisor_approve/approve/<nuid>/<course_id>',views.approveClass.as_view()),
     path('advisor_approve/decline/<nuid>/<course_id>',views.declineClass.as_view())
 
+    path('admin/add_course', views.getNewCourse.as_view()),
+    path('admin/manage_courses', views.manageCourse.as_view()),
+    path('admin/assign_classroom', views.assignRoom.as_view()),
+    path('admin/delete/<course_id>',views.delete_course,name ='delete-course'),
+    path('admin/edit/<course_id>',views.update_course,name ='edit-course')
 
 ]

@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, DeleteView
 
 from dbapp.api.advisorTicket import approve, decline, getTickets
-
+from django.db import connection
 from .api.class_detail import get_all_class
-from .models import Visitor
+from .models import Visitor, Course
 from .api.studentCRUD import getRegisterClass, get_course_info, register, deleteTicket
-
+from .api.courseCRUD import addCourse, getAllCourses, deleteCourse, connectRoom
+from .forms import CourseForm
 
 
 # Create your views here.
@@ -20,6 +21,10 @@ def student_page(request):
 
 def advisor_page(request):
     return render(request, 'advisor_main.html')
+
+
+def admin_page(request):
+    return render(request, 'admin_main.html')
 
 
 class getStudentNuid(TemplateView):
@@ -89,3 +94,63 @@ class declineClass(TemplateView):
     def post(self, req, course_id, nuid):
         decline(nuid, course_id)
         return redirect("/advisor_approve")
+
+
+class getNewCourse(TemplateView):
+    template_name = 'add_course.html'
+    def get(self, req):
+            return render(req, self.template_name, {})
+
+    def post(self, req):
+        course_id = req.POST.get("course_id")
+        course_name = req.POST.get("course_name")
+        capacity = req.POST.get("capacity")
+        department = req.POST.get("department")
+        type = req.POST.get("type")
+        semester = req.POST.get("semester")
+        instructor = req.POST.get("instructor")
+        addCourse(course_id, course_name, capacity, department, type, semester, instructor)
+        str1="Data inserted to course table"
+        return render(req, self.template_name, {'msg':str1})
+
+class manageCourse(TemplateView):
+    template_name = 'manage_course.html'
+    def get(self, req):
+        context = getAllCourses()
+        return render(req, self.template_name, context)
+
+
+class assignRoom(TemplateView):
+    template_name='assignRoom.html'
+    def get(self, req):
+        return render(req, self.template_name, {})
+
+    def post(self, req):
+        course_id = req.POST.get("course_id")
+        room = req.POST.get("room")
+        connectRoom(course_id, room)
+        return redirect("/admin/manage_courses")
+#         return render(req, self.template_name, {})
+
+
+def delete_course(request, course_id):
+    cursor = connection.cursor()
+    cursor.execute('''SET FOREIGN_KEY_CHECKS=0''')
+    course = Course.objects.get(pk=course_id)
+    course.delete()
+    cursor.execute('''SET FOREIGN_KEY_CHECKS=1''')
+    return redirect("/admin/manage_courses")
+
+
+def update_course(request, course_id):
+    course = Course.objects.get(pk=course_id)
+    form = CourseForm(request.POST or None, instance = course)
+    if form.is_valid():
+        form.save()
+        return redirect("/admin/manage_courses")
+
+    return render(request, 'edit_course.html', {'course': course, 'form': form})
+
+
+
+

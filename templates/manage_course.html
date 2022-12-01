@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <!-- Bootstrap core CSS -->
+  <link rel='stylesheet' type="text/css" href="{% static '/css/bootstrap.css' %}">
+  <title>Student Hub</title>
+</head>
+<body>
+
+{#Nav Bar#}
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/student">Student</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/advisor">Advisor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Admin</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container px-4 py-5">
+
+  <!-- Content here -->
+  <h2 class="pb-2 border-bottom">Manage Courses</h2>
+
+
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">course id</th>
+        <th scope="col">name</th>
+        <th scope="col">capacity</th>
+        <th scope="col">department</th>
+        <th scope="col">type</th>
+        <th scope="col">semester</th>
+        <th scope="col">instructor</th>
+        <th scope="col">ClassRoom</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for item in items %}
+
+      <tr>
+        <td>{{ item.Course_id }}</td>
+        <td>{{ item.Course_name }}</td>
+        <td>{{ item.Max_capacity }}</td>
+        <td>{{ item.Department }}</td>
+        <td>{{ item.Course_type }}</td>
+        <td>{{ item.Semester }}</td>
+        <td>{{ item.Instructor_id }}</td>
+        <td>{{ item.ClassRoom}}</td>
+        <td>
+          <a href="{% url 'edit-course' item.Course_id %}" class = "btn btn-primary btn-sm">Update</a>
+
+          <a href="{% url 'delete-course' item.Course_id %}" class = "btn btn-primary btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+</body>
+</html>

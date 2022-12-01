@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' type="text/css" href="{% static '/css/bootstrap.css' %}">
+    <title>Student Hub</title>
+</head>
+<body>
+
+{#Nav Bar#}
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/student">Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/advisor">Advisor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container px-4 py-5">
+
+    <!-- Content here -->
+    <h2 class="pb-2 border-bottom">Add Course</h2>
+
+    <form method = "POST">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="course_id"><b>Course ID</b></label>
+            <input  type="text" placeholder="Enter course id" name="course_id" id="course_id" required/>
+        </div>
+
+        <div class="mb-4">
+            <label for="course_name"><b>Course Name</b></label>
+            <input type="text" placeholder="Enter course name" name="course_name" id="course_name" required/>
+        </div>
+
+        <div class="mb-4">
+            <label for="capacity"><b>Capacity</b></label>
+            <input type="text" placeholder="Enter capacity" name="capacity" id="capacity" required/>
+        </div>
+
+        <div class="mb-4">
+            <label><b>Department</b></label>
+            <select name = "department" id="department">
+                <option value="CS">CS</option>
+                <option value="DS">DS</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label><b>Type</b></label>
+            <select name = "type" id="type">
+                <option value="Traditional">Traditional</option>
+                <option value="Online">Online</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label><b>Semester</b></label>
+            <select name = "semester" id="semester">
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+                <option value="Summer">Fall</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="instructor"><b>instructor</b></label>
+            <input type="text" placeholder="Enter instructor" name="instructor" id="instructor" required>
+        </div>
+
+        <hr>
+
+        <input type="submit" value = "Add Course"/>
+    </form>
+
+</div>
+
+</body>
+</html>
