@@ -1,4 +1,15 @@
 .DS_Store
 .idea
 
-dbapp/__pycache__/
+dbapp/__pycache__/*
+
+dbapp/api/__pycache__/__init__.cpython-310.pyc
+dbapp/api/__pycache__/advisorTicket.cpython-310.pyc
+dbapp/api/__pycache__/class_detail.cpython-310.pyc
+dbapp/api/__pycache__/courseCRUD.cpython-310.pyc
+dbapp/api/__pycache__/studentCRUD.cpython-310.pyc
+dbapp/migrations/__pycache__/__init__.cpython-310.pyc
+dbtest/__pycache__/__init__.cpython-310.pyc
+dbtest/__pycache__/settings.cpython-310.pyc
+dbtest/__pycache__/urls.cpython-310.pyc
+dbtest/__pycache__/wsgi.cpython-310.pyc
