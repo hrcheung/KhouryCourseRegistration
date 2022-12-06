@@ -22,7 +22,7 @@ class CourseForm(ModelForm):
         'course_id': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Course ID'}),
         'course_name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Course Name'}),
         'semester': forms.TextInput(attrs={'class':'form-control'}),
-        'max_capacity': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Capacity'}),
+        'max_capacity': forms.NumberInput(attrs={'class':'form-control', 'placeholder': 'Capacity'}),
         'department': forms.TextInput(attrs={'class':'form-control'}),
         'course_type': forms.TextInput(attrs={'class':'form-control'}),
         'classroom': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'ClassRoom'}),
